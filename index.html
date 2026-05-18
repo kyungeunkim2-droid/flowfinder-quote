@@ -207,7 +207,8 @@ var STD_COLORS = {"일반형 데스크": ["HWBKM", "OCYDSG", "OCYWW", "WWDSG", "
 var GITHUB_RAW = 'https://raw.githubusercontent.com/kyungeunkim2-droid/flowfinder-quote/main/textures/';
 var TEXTURE_MAP = {
   // 표준 데스크
-  'HW': 'desk/standard/HW.png', 'OSG': 'desk/standard/OSG.jpg', 'WW': 'desk/standard/WW.jpg',
+  'HW': 'desk/standard/HW.png', 'OSG': 'desk/standard/OSG.jpg', 'WW': 'desk/standard/WW.jpg','WWK': 'desk/standard/WW.jpg',
+'OCY': 'desk/standard/OSG.jpg',
   'HWBKM': 'desk/standard/HW.png', 'WWWW': 'desk/standard/WW.jpg', 'WWDSG': 'desk/standard/WW.jpg',
   'WWKBKM': 'desk/standard/WW.jpg', 'WWWW2': 'desk/standard/WW.jpg',
   'OCYWW': 'desk/standard/OSG.jpg', 'OCYDSG': 'desk/standard/OSG.jpg',
@@ -1506,15 +1507,14 @@ function submitSizeForm(fid) {
   if (wEl && wEl.disabled) return;
   if (hEl && hEl.disabled) return;
 
-  var w = wEl ? (parseInt(wEl.value) || null) : null;
-  var d = dEl ? (parseInt(dEl.value) || null) : null;
-  var h = hEl ? (parseInt(hEl.value) || null) : null;
-
+  var w = wEl ? (wEl.value !== '' ? parseInt(wEl.value) : null) : null;
+  var d = dEl ? (dEl.value !== '' ? parseInt(dEl.value) : null) : null;
+  var h = hEl ? (hEl.value !== '' ? parseInt(hEl.value) : null) : null;
   if (catInfo.isDesk && !w) {
     if (wEl) { wEl.style.borderColor = '#f87171'; wEl.focus(); }
     return;
   }
-  if (catInfo.isScreen && !h) {
+  if (catInfo.isScreen && (h === null || h === undefined)) {
     if (hEl) { hEl.style.borderColor = '#f87171'; hEl.focus(); }
     return;
   }
